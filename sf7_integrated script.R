@@ -347,7 +347,7 @@ pCM <- FindConservedMarkers(sf7.integrated, ident.1="Pacemaker Cardiomyocytes", 
 epi <- FindConservedMarkers(sf7.integrated, ident.1="Epicardium", grouping.var = "genome", verbose = FALSE)
 rbcs <- FindConservedMarkers(sf7.integrated, ident.1="Erythrocytes", grouping.var = "genome", verbose = FALSE)
 Bcells <- FindConservedMarkers(sf7.integrated, ident.1="B cells", grouping.var = "genome", verbose = FALSE)
-platelets <- FindConservedMarkers(sf7.integrated, ident.1="platelets/megakaryocytes", grouping.var = "genome", verbose = FALSE)
+platelets <- FindConservedMarkers(sf7.integrated, ident.1="Platelets_Megakaryocytes", grouping.var = "genome", verbose = FALSE)
 neutro <- FindConservedMarkers(sf7.integrated, ident.1="Neutrophils", grouping.var = "genome", verbose = FALSE)
 hsc <- FindConservedMarkers(sf7.integrated, ident.1="HSCs", grouping.var = "genome", verbose = FALSE)
 thromb <- FindConservedMarkers(sf7.integrated, ident.1="Thrombopoeitic Cells", grouping.var = "genome", verbose = FALSE)
