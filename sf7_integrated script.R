@@ -320,11 +320,8 @@ thromb_v2 <- WhichCells(sf7.integrated, expression=vwa11.1>1)
 
 thromb_all <- c(thromb_v1, thromb_v2)
 
-sf7.integrated <- SetIdent(sf7.integrated, cells=thromb_all, value="30")
-
-sf7.integrated <- SetIdent(sf7.integrated, cells=thromb_all, value="Thrombopoeitic Cells")
-
 Idents(sf7.integrated) <- "seurat_clusters"
+sf7.integrated <- SetIdent(sf7.integrated, cells=thromb_all, value="Thrombopoeitic Cells")
 current.cluster.ids <- c("Thrombopoeitic Cells", 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29)
 new.cluster.ids <- c("Thrombopoeitic Cells","Cardiomyocytes","Cardiomyocytes", "Cardiomyocytes", "Cardiomyocytes", "Cardiomyocytes", "Endothelium", "Cardiomyocytes","Cardiomyocytes", "Endothelium", "Cardiomyocytes", "Endothelium","Fibroblasts", "Cardiomyocytes", "Cardiomyocytes", "Endothelium", "Pacemaker Cardiomyocytes", "T cells", "Smooth Muscle", "Doublets", "Erythrocytes", "Macrophages", "Endothelium", "Cardiomyocytes", "Doublets", "HSCs", "Epicardium", "B cells", "Doublets", "Neutrophils", "Platelets_Megakaryocytes")
 Idents(sf7.integrated) <- plyr::mapvalues(Idents(sf7.integrated), from = current.cluster.ids, to = new.cluster.ids)
@@ -332,6 +329,13 @@ DimPlot(sf7.integrated, label = TRUE)
 
 sf7.integrated$celltype <- Idents(sf7.integrated)
 
+sf7.integrated <- SetIdent(sf7.integrated, cells=thromb_all, value="30")
+
+Idents(sf7.integrated) <- "seurat_clusters"
+current.cluster.ids <- c("30", 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29)
+current.cluster.ids <- c("30", 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29)
+Idents(sf7.integrated) <- plyr::mapvalues(Idents(sf7.integrated), from = current.cluster.ids, to = new.cluster.ids)
+DimPlot(sf7.integrated, label = TRUE)
 
 CM <- FindConservedMarkers(sf7.integrated, ident.1="Cardiomyocytes", grouping.var = "genome", verbose = FALSE)
 endo <- FindConservedMarkers(sf7.integrated, ident.1="Endothelium", grouping.var = "genome", verbose = FALSE)
@@ -356,7 +360,7 @@ write.csv(macro, file = "macro_conserved_genome_markers.csv", row.names = T, quo
 write.csv(fibro, file = "fibro_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(endo/CM, file = "endo/CM_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(sm, file = "sm_conserved_genome_markers.csv", row.names = T, quote = F)
-write.csv(immatureCM, file = "immatureCM_conserved_genome_markers.csv", row.names = T, quote = F)
+write.csv(pCM, file = "pCM_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(epi, file = "epicardium_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(rbcs, file = "rbcs_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(Bcells, file = "Bcells_conserved_genome_markers.csv", row.names = T, quote = F)
@@ -364,7 +368,6 @@ write.csv(platelets, file = "platelets_conserved_genome_markers.csv", row.names 
 write.csv(neutro, file = "neutro_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(hsc, file = "hsc_conserved_genome_markers.csv", row.names = T, quote = F)
 write.csv(thromb, file = "thromb_conserved_genome_markers.csv", row.names = T, quote = F)
-
 
 FeaturePlot(sf7.integrated, features="nFeature_RNA", split.by="genome")
 Idents(sf7.integrated) <- "genome"
